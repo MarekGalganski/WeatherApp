@@ -9,6 +9,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import pl.marekGalganski.Config;
+import pl.marekGalganski.model.JSONConverter;
+
+import java.util.Map;
 
 public class Controller {
 
@@ -111,6 +115,8 @@ public class Controller {
     @FXML
     private VBox travelLocationChartBox;
 
+    private Map<String, Integer> citiesMap;
+
     @FXML
     void currentLocationBtn(ActionEvent event) {
 
@@ -120,6 +126,22 @@ public class Controller {
     void travelLocationBtn(ActionEvent event) {
 
     }
+
+    @FXML
+    public void initialize(){
+        try {
+            JSONConverter jsonConverter = new JSONConverter();
+            citiesMap = jsonConverter.getCitiesFromJson(Config.FILE_WITH_CITIES);
+            System.out.println(citiesMap);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+
+    }
+
+
 
 }
 
