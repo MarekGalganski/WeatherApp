@@ -10,8 +10,8 @@ public class AutoCompleteTextField {
 
     public static void setAutoComplete(TextField textField, Map<String, Integer> cities) {
         TextFields.bindAutoCompletion(textField, t->{
-           return cities.keySet().stream().filter(elem->{
-               return elem.toLowerCase().startsWith(t.getUserText().toLowerCase());
+           return cities.keySet().stream().filter(e->{
+               return e.toLowerCase().startsWith(t.getUserText().toLowerCase());
            }).collect(Collectors.toList());
         });
     }

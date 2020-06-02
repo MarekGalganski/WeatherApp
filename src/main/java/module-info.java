@@ -8,6 +8,7 @@ module pl.marekGalganski {
     requires gson;
     requires java.sql;
     requires org.controlsfx.controls;
+    requires owm.japis;
 
 
 

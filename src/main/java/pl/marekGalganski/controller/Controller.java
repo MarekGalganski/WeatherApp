@@ -12,7 +12,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import pl.marekGalganski.Config;
 import pl.marekGalganski.model.AutoCompleteTextField;
-import pl.marekGalganski.model.JSONConverter;
+import pl.marekGalganski.model.CurrentWeatherForecast;
+import pl.marekGalganski.model.subsidiaryClasses.DateFormatter;
+import pl.marekGalganski.model.subsidiaryClasses.JSONConverter;
+import pl.marekGalganski.model.OpenWeatherMap;
+
 
 
 import java.net.URL;
@@ -133,9 +137,12 @@ public class Controller implements Initializable {
         try {
             JSONConverter jsonConverter = new JSONConverter();
             citiesMap = jsonConverter.getCitiesFromJson(Config.FILE_WITH_CITIES);
-            System.out.println(citiesMap.get("Warszawa,PL"));
             setAutoCompleteTextField();
 
+            OpenWeatherMap openWeatherMap = new OpenWeatherMap(Config.API_KEY);
+            CurrentWeatherForecast currentWeatherForecast = new CurrentWeatherForecast(openWeatherMap, citiesMap.get(
+                    "Kolo,PL"));
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
