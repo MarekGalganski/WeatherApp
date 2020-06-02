@@ -42,7 +42,8 @@
                      </padding>
                   </TextField>
                   <Label fx:id="currentLocationWarningLabel" styleClass="text-red, text-16" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                  <Button focusTraversable="false" onAction="#currentLocationBtn" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Button focusTraversable="false" onAction="#setCurrentLocation" GridPane.columnIndex="1"
+                          GridPane.rowIndex="1">
                      <padding><Insets bottom="8.0" left="8.0" right="8.0" top="8.0" /></padding>
                      <graphic>
                         <FontAwesomeIconView glyphName="LOCATION_ARROW" size="18px" />

@@ -26,7 +26,7 @@ public class App extends Application {
             primaryStage.show();
 
         } catch(Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
