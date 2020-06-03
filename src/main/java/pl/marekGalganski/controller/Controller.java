@@ -10,8 +10,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import net.aksingh.owmjapis.api.APIException;
 import pl.marekGalganski.Config;
 import pl.marekGalganski.model.AutoCompleteTextField;
+import pl.marekGalganski.model.CurrentWeatherControl;
 import pl.marekGalganski.model.CurrentWeatherForecast;
 import pl.marekGalganski.model.subsidiaryClasses.DateFormatter;
 import pl.marekGalganski.model.subsidiaryClasses.JSONConverter;
@@ -125,12 +127,10 @@ public class Controller implements Initializable {
     private VBox travelLocationChartBox;
 
     private Map<String, Integer> citiesMap;
+    private CurrentWeatherControl currentLocationCurrentWeatherControl;
+    private CurrentWeatherControl travelLocationCurrentWeatherControl;
 
 
-    @FXML
-    void travelLocationBtn(ActionEvent event) {
-
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -138,10 +138,6 @@ public class Controller implements Initializable {
             JSONConverter jsonConverter = new JSONConverter();
             citiesMap = jsonConverter.getCitiesFromJson(Config.FILE_WITH_CITIES);
             setAutoCompleteTextField();
-
-            OpenWeatherMap openWeatherMap = new OpenWeatherMap(Config.API_KEY);
-            CurrentWeatherForecast currentWeatherForecast = new CurrentWeatherForecast(openWeatherMap, citiesMap.get(
-                    "Kolo,PL"));
             
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -157,8 +153,33 @@ public class Controller implements Initializable {
 
     @FXML
     void setCurrentLocation(ActionEvent event) {
+        try{
+            String city = currentLocationTextFieldSearch.getText();
+            currentLocationTextFieldSearch.setText(city);
+            OpenWeatherMap openWeatherMap = new OpenWeatherMap(Config.API_KEY);
+
+            setCurrentWeatherCurrentLocation(openWeatherMap, citiesMap.get(city));
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    void setTravelLocation(ActionEvent event) {
 
     }
+
+
+    private void setCurrentWeatherCurrentLocation(OpenWeatherMap openWeatherMap, Integer cityId) throws APIException {
+        currentLocationCurrentWeatherControl = new CurrentWeatherControl(currentLocationVBox,currentLocationDayLabel,
+                currentLocationCityName, currentLocationSunriseTime, currentLocationSunsetTime,
+                currentLocationMainTemperature, currentLocationWeatherDescription, currentLocationWindSpeed,
+                currentLocationHumidity, currentLocationPressure, currentLocationWeatherIcon);
+
+        currentLocationCurrentWeatherControl.setControlsCurrentWeather(openWeatherMap, cityId);
+    }
+
 
 
 }
