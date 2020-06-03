@@ -18,7 +18,7 @@ public class App extends Application {
         try {
             Parent grid = FXMLLoader.load(getClass().getResource("/view.fxml"));
 
-            primaryStage.setTitle("DoubleWeatherApp");
+            primaryStage.setTitle("WeatherApp");
 
             Scene scene = new Scene(grid, 900, 575);
 
@@ -26,7 +26,7 @@ public class App extends Application {
             primaryStage.show();
 
         } catch(Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 

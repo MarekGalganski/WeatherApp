@@ -3,18 +3,29 @@ package pl.marekGalganski.controller;
 import de.jensd.fx.glyphs.weathericons.WeatherIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import net.aksingh.owmjapis.api.APIException;
 import pl.marekGalganski.Config;
-import pl.marekGalganski.model.JSONConverter;
+import pl.marekGalganski.model.AutoCompleteTextField;
+import pl.marekGalganski.model.CurrentWeatherControl;
+import pl.marekGalganski.model.CurrentWeatherForecast;
+import pl.marekGalganski.model.subsidiaryClasses.DateFormatter;
+import pl.marekGalganski.model.subsidiaryClasses.JSONConverter;
+import pl.marekGalganski.model.OpenWeatherMap;
 
+
+
+import java.net.URL;
 import java.util.Map;
+import java.util.ResourceBundle;
 
-public class Controller {
+public class Controller implements Initializable {
 
     @FXML
     private GridPane mainGrid;
@@ -116,28 +127,75 @@ public class Controller {
     private VBox travelLocationChartBox;
 
     private Map<String, Integer> citiesMap;
+    private CurrentWeatherControl currentLocationCurrentWeatherControl;
+    private CurrentWeatherControl travelLocationCurrentWeatherControl;
 
-    @FXML
-    void currentLocationBtn(ActionEvent event) {
 
-    }
 
-    @FXML
-    void travelLocationBtn(ActionEvent event) {
-
-    }
-
-    @FXML
-    public void initialize(){
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             JSONConverter jsonConverter = new JSONConverter();
             citiesMap = jsonConverter.getCitiesFromJson(Config.FILE_WITH_CITIES);
-            System.out.println(citiesMap);
-
+            setAutoCompleteTextField();
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
+
+    }
+
+    private void setAutoCompleteTextField (){
+        AutoCompleteTextField.setAutoComplete(currentLocationTextFieldSearch, citiesMap);
+        AutoCompleteTextField.setAutoComplete(travelLocationTextFieldSearch, citiesMap);
+    }
+
+    @FXML
+    void setCurrentLocation() {
+        try{
+            String city = currentLocationTextFieldSearch.getText();
+            currentLocationTextFieldSearch.setText(city);
+            OpenWeatherMap openWeatherMap = new OpenWeatherMap(Config.API_KEY);
+
+            setCurrentWeatherCurrentLocation(openWeatherMap, citiesMap.get(city));
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    void setTravelLocation() {
+        try{
+            String city = travelLocationTextFieldSearch.getText();
+            travelLocationTextFieldSearch.setText(city);
+            OpenWeatherMap openWeatherMap = new OpenWeatherMap(Config.API_KEY);
+
+            setCurrentWeatherTravelLocation(openWeatherMap, citiesMap.get(city));
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+
+    private void setCurrentWeatherCurrentLocation(OpenWeatherMap openWeatherMap, Integer cityId) throws APIException {
+        currentLocationCurrentWeatherControl = new CurrentWeatherControl(currentLocationVBox,currentLocationDayLabel,
+                currentLocationCityName, currentLocationSunriseTime, currentLocationSunsetTime,
+                currentLocationMainTemperature, currentLocationWeatherDescription, currentLocationWindSpeed,
+                currentLocationHumidity, currentLocationPressure, currentLocationWeatherIcon);
+
+        currentLocationCurrentWeatherControl.setControlsCurrentWeather(openWeatherMap, cityId);
+    }
+
+    private void setCurrentWeatherTravelLocation(OpenWeatherMap openWeatherMap, Integer cityId) throws APIException {
+        travelLocationCurrentWeatherControl = new CurrentWeatherControl(travelLocationVBox, travelLocationDayLabel,
+                travelLocationCityName, travelLocationSunriseTime, travelLocationSunsetTime,
+                travelLocationMainTemperature, travelLocationWeatherDescription, travelLocationWindSpeed,
+                travelLocationHumidity, travelLocationPressure, travelLocationWeatherIcon);
+
+        travelLocationCurrentWeatherControl.setControlsCurrentWeather(openWeatherMap, cityId);
 
     }
 

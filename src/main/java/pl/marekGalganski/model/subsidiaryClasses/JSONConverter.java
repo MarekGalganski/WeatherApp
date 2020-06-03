@@ -1,4 +1,4 @@
-package pl.marekGalganski.model;
+package pl.marekGalganski.model.subsidiaryClasses;
 
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
+import pl.marekGalganski.model.City;
 
 
 public class JSONConverter {
