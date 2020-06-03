@@ -13,6 +13,7 @@ public class OpenWeatherMap {
     public OpenWeatherMap(String apiKey) {
         this.apiKey = apiKey;
         owm = new OWM(apiKey);
+        owm.setUnit(OWM.Unit.METRIC);
     }
 
     public CurrentWeather getCurrentWeather(Integer cityId) throws APIException {

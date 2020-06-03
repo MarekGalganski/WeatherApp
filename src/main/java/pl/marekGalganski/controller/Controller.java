@@ -152,7 +152,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void setCurrentLocation(ActionEvent event) {
+    void setCurrentLocation() {
         try{
             String city = currentLocationTextFieldSearch.getText();
             currentLocationTextFieldSearch.setText(city);
@@ -166,8 +166,17 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void setTravelLocation(ActionEvent event) {
+    void setTravelLocation() {
+        try{
+            String city = travelLocationTextFieldSearch.getText();
+            travelLocationTextFieldSearch.setText(city);
+            OpenWeatherMap openWeatherMap = new OpenWeatherMap(Config.API_KEY);
 
+            setCurrentWeatherTravelLocation(openWeatherMap, citiesMap.get(city));
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
 
@@ -178,6 +187,16 @@ public class Controller implements Initializable {
                 currentLocationHumidity, currentLocationPressure, currentLocationWeatherIcon);
 
         currentLocationCurrentWeatherControl.setControlsCurrentWeather(openWeatherMap, cityId);
+    }
+
+    private void setCurrentWeatherTravelLocation(OpenWeatherMap openWeatherMap, Integer cityId) throws APIException {
+        travelLocationCurrentWeatherControl = new CurrentWeatherControl(travelLocationVBox, travelLocationDayLabel,
+                travelLocationCityName, travelLocationSunriseTime, travelLocationSunsetTime,
+                travelLocationMainTemperature, travelLocationWeatherDescription, travelLocationWindSpeed,
+                travelLocationHumidity, travelLocationPressure, travelLocationWeatherIcon);
+
+        travelLocationCurrentWeatherControl.setControlsCurrentWeather(openWeatherMap, cityId);
+
     }
 
 
