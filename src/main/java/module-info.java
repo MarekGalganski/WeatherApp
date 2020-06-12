@@ -9,6 +9,7 @@ module pl.marekGalganski {
     requires java.sql;
     requires org.controlsfx.controls;
     requires owm.japis;
+    requires geotimezone;
 
 
 
