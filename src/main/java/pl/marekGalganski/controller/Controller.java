@@ -12,13 +12,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import net.aksingh.owmjapis.api.APIException;
 import pl.marekGalganski.Config;
-import pl.marekGalganski.model.AutoCompleteTextField;
-import pl.marekGalganski.model.CurrentWeatherControl;
-import pl.marekGalganski.model.CurrentWeatherForecast;
+import pl.marekGalganski.model.*;
 import pl.marekGalganski.model.subsidiaryClasses.DateFormatter;
 import pl.marekGalganski.model.subsidiaryClasses.JSONConverter;
-import pl.marekGalganski.model.OpenWeatherMap;
-
 
 
 import java.net.URL;
@@ -129,6 +125,8 @@ public class Controller implements Initializable {
     private Map<String, Integer> citiesMap;
     private CurrentWeatherControl currentLocationCurrentWeatherControl;
     private CurrentWeatherControl travelLocationCurrentWeatherControl;
+    private FiveDaysWeatherControl currentLocationFiveDaysWeatherControl;
+    private FiveDaysWeatherControl travelLocationFiveDaysWeatherControl;
 
 
 
@@ -159,6 +157,7 @@ public class Controller implements Initializable {
             OpenWeatherMap openWeatherMap = new OpenWeatherMap(Config.API_KEY);
 
             setCurrentWeatherCurrentLocation(openWeatherMap, citiesMap.get(city));
+            setFiveDaysForecastWeatherCurrentLocation(openWeatherMap, citiesMap.get(city));
 
         } catch (Exception e) {
             System.out.println(e);
@@ -173,6 +172,7 @@ public class Controller implements Initializable {
             OpenWeatherMap openWeatherMap = new OpenWeatherMap(Config.API_KEY);
 
             setCurrentWeatherTravelLocation(openWeatherMap, citiesMap.get(city));
+            setFiveDaysForecastWeatherTravelLocation(openWeatherMap, citiesMap.get(city));
 
         } catch (Exception e) {
             System.out.println(e);
@@ -197,6 +197,20 @@ public class Controller implements Initializable {
 
         travelLocationCurrentWeatherControl.setControlsCurrentWeather(openWeatherMap, cityId);
 
+    }
+
+    private void setFiveDaysForecastWeatherCurrentLocation(OpenWeatherMap openWeatherMap, Integer cityId) throws APIException {
+        currentLocationFiveDaysWeatherControl = new FiveDaysWeatherControl(currentLocationChartBox,
+                currentLocationWarningLabel, currentLocationScrollPane);
+
+        currentLocationFiveDaysWeatherControl.setControlsOfFiveDaysWeather(openWeatherMap, cityId);
+    }
+
+    private void setFiveDaysForecastWeatherTravelLocation(OpenWeatherMap openWeatherMap, Integer cityId) throws APIException {
+        travelLocationFiveDaysWeatherControl = new FiveDaysWeatherControl(travelLocationChartBox,
+                travelLocationWarningLabel, travelLocationScrollPane);
+
+        travelLocationFiveDaysWeatherControl.setControlsOfFiveDaysWeather(openWeatherMap, cityId);
     }
 
 

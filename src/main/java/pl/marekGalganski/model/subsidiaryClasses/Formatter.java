@@ -11,10 +11,17 @@ public class Formatter {
     }
 
     public static double changeMPerStoKmPerH(double mPerS) {
-        if(mPerS >= 0) {
             return getTwoDecimalPlacesNumber(mPerS * 3.6);
-        } else {
-            throw new IllegalArgumentException();
-        }
+    }
+
+    public static String firstLetterToUpper(String word) {
+        char firstLetter = word.toUpperCase().charAt(0);
+        String anotherLetters = word.substring(1).toLowerCase();
+
+        return firstLetter + anotherLetters;
+    }
+
+    public static String stringWithoutLastChar(String word) {
+        return word.substring(0, word.length() - 1);
     }
 }

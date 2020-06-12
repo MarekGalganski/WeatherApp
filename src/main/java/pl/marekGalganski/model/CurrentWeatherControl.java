@@ -40,7 +40,7 @@ public class CurrentWeatherControl {
     public void setControlsCurrentWeather(OpenWeatherMap openWeatherMap, Integer cityId) throws APIException {
         CurrentWeatherForecast currentWeatherForecast = new CurrentWeatherForecast(openWeatherMap, cityId);
 
-        dateLabel.setText(currentWeatherForecast.getDate());
+        dateLabel.setText(currentWeatherForecast.getDate() + currentWeatherForecast.getStrTimeOffset());
         cityNameLabel.setText(currentWeatherForecast.getCityName());
         sunsetTimeLabel.setText(currentWeatherForecast.getSunsetTime());
         sunriseTimeLabel.setText(currentWeatherForecast.getSunriseTime());
