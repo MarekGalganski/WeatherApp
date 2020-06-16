@@ -7,7 +7,6 @@ import pl.marekGalganski.model.subsidiaryClasses.Formatter;
 import pl.marekGalganski.model.subsidiaryClasses.GlyphNames;
 import pl.marekGalganski.model.subsidiaryClasses.TimeZoneOfCity;
 
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -27,18 +26,13 @@ public class CurrentWeatherForecast {
         return DateFormatter.getDayMonthYear(date, getTimeZoneOfTheCity());
     }
 
-    public String getStrTimeOffset() {
+    public String getCurrentTime() {
 
-        int offset = getTimeOffset();
-        String offsetStr = String.format("%02d:", Math.abs(offset));
+        Date date = currentWeather.getDateTime();
 
-        if(offset > 0) {
-            return " (UTC +" + offsetStr + "00)";
-        } else if (offset < 0){
-            return " (UTC -" + offsetStr + "00)";
-        } else {
-            return " (UTC " + offsetStr + "00)";
-        }
+        return ", " + DateFormatter.getHourMinute(date, getTimeZoneOfTheCity());
+
+
     }
 
     private int getTimeOffset() {
@@ -119,5 +113,6 @@ public class CurrentWeatherForecast {
         return currentWeather.getCoordData().getLongitude();
     }
 
+    
 
 }

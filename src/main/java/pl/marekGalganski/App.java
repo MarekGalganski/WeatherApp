@@ -20,7 +20,7 @@ public class App extends Application {
 
             primaryStage.setTitle("WeatherApp");
 
-            Scene scene = new Scene(grid, 900, 575);
+            Scene scene = new Scene(grid, 1000, 600);
 
             primaryStage.setScene(scene);
             primaryStage.show();

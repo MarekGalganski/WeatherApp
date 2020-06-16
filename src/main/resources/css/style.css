@@ -3,45 +3,16 @@
     -fx-background: rgb(225, 228, 203);
 }
 
-.bg-sunny {
-	-fx-background-color: linear-gradient(to bottom, #ff920a, #ffaf4b);
+.bg-up-linear-left {
+    -fx-background-color: linear-gradient(to top right, #0D324D, #7F5A83);
 }
-
-.bg-white {
-    -fx-background-color: rgba(255, 255, 255, 0.3);
+.bg-up-linear-right {
+    -fx-background-color: linear-gradient(to top right, #380036, #0CBABA);
 }
-
 .bg-chart {
-	-fx-background-color: rgba(255, 255, 255, 0.3);
-	-fx-background-radius: 10;
-}
+    -fx-border-color: black;
+    -fx-border-radius: 10;
 
-.bg-night {
-	-fx-background-color: linear-gradient(to top, #4b6cb7, #182848);
-}
-
-.bg-rain {
-	-fx-background-color: linear-gradient(to bottom, #3f4c6b, #606c88);
-}
-
-.bg-thunderstorm {
-	-fx-background-color: linear-gradient(to top, #948e99, #2e1437);
-}
-
-.bg-mist {
-	-fx-background-color: linear-gradient(to top, #44a08d, #093637);
-}
-
-.bg-clear {
-	-fx-background-color: linear-gradient(to bottom, #0052d4, #4364f7, #6fb1fc);
-}
-
-.bg-snow{
-	-fx-background-color: linear-gradient(to bottom, #6e45e2, #88d3ce);
-}
-
-.bg-cloudy{
-	-fx-background-color: linear-gradient(to bottom, #4e54c8, #8f94fb);
 }
 
 .label,
@@ -61,6 +32,10 @@
 	-fx-text-fill: #922B21;
 }
 
+.text-loc-bold {
+    -fx-font-weight: bold;
+}
+
 .text-bold {
 	-fx-font-weight: bold;
 	-fx-font-size: 14;
@@ -77,15 +52,9 @@
 .text-22 {
 	-fx-font-size: 22;
 }
-
-.tempreture-description {
-	-fx-font-size: 20;
-	-fx-fill: rgb(225, 228, 203);
-}
-
-.tempreture-number {
-	-fx-font-size: 45;
-	-fx-fill: rgb(225, 228, 203);
+.text-26 {
+	-fx-font-size: 26;
+	-fx-underline: true;
 }
 
 .localization-font {
@@ -107,27 +76,24 @@
     -fx-background-color: transparent;
 }
 
-.axis:left {
+.axis {
 	-fx-border-color: transparent;
-}
-
-.axis:bottom {
-	-fx-border-color: transparent;
+    -fx-tick-label-fill: black;
 }
 
 .default-color1.chart-series-line {
 	-fx-stroke: transparent;
 }
 
+.default-color0.chart-series-line {
+ -fx-stroke: black;
+ }
+
 .scroll-pane > .viewport,
 .scroll-pane,
 .default-color0.chart-line-symbol,
 .default-color1.chart-line-symbol {
   	-fx-background-color: transparent;
-}
-
-.chart-label {
-	-fx-font-size: 18;
 }
 
 .scroll-bar:horizontal, .scroll-bar:vertical{

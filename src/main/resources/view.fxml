@@ -2,6 +2,8 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import de.jensd.fx.glyphs.weathericons.WeatherIconView?>
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -14,11 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import java.net.URL?>
-<GridPane fx:id="mainGrid"
-          xmlns="http://javafx.com/javafx/11.0.1"
-          xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="pl.marekGalganski.controller.Controller">
+<GridPane fx:id="mainGrid" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.marekGalganski.controller.Controller">
     <columnConstraints>
         <ColumnConstraints percentWidth="50" />
         <ColumnConstraints percentWidth="50" />
@@ -27,12 +25,16 @@
    <children>
       <VBox fx:id="currentLocationVBox" alignment="CENTER" styleClass="text-white" GridPane.columnIndex="0" GridPane.rowIndex="0">
          <children>
-            <GridPane alignment="CENTER" hgap="10" styleClass="bg-white" vgap="10">
+            <GridPane alignment="CENTER" hgap="10" vgap="10">
                <padding>
                   <Insets topRightBottomLeft="15" />
                </padding>
                <children>
-                  <Label styleClass="text-black, text-16" text="Current Location" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+                  <Label lineSpacing="2.0" text="Current Location" textFill="#ffffff05" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+                     <styleClass>
+                        <String fx:value="text-18" />
+                        <String fx:value="text-loc-bold" />
+                     </styleClass></Label>
                   <TextField fx:id="currentLocationTextFieldSearch" alignment="CENTER" focusTraversable="false" promptText="Enter City" styleClass="field-search" GridPane.columnIndex="0" GridPane.rowIndex="1">
                      <font>
                         <Font size="15.0" />
@@ -42,8 +44,7 @@
                      </padding>
                   </TextField>
                   <Label fx:id="currentLocationWarningLabel" styleClass="text-red, text-16" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                  <Button focusTraversable="false" onAction="#setCurrentLocation" GridPane.columnIndex="1"
-                          GridPane.rowIndex="1">
+                  <Button focusTraversable="false" onAction="#setCurrentLocation" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <padding><Insets bottom="8.0" left="8.0" right="8.0" top="8.0" /></padding>
                      <graphic>
                         <FontAwesomeIconView glyphName="LOCATION_ARROW" size="18px" />
@@ -59,19 +60,26 @@
                   <RowConstraints />
                   <RowConstraints />
                </rowConstraints>
+               <styleClass>
+                  <String fx:value="bg-white" />
+                  <String fx:value="bg-up-linear-left" />
+               </styleClass>
             </GridPane>
-            <ScrollPane fx:id="currentLocationScrollPane" fitToHeight="true" fitToWidth="true">
+            <ScrollPane fx:id="currentLocationScrollPane" fitToHeight="true" fitToWidth="true" styleClass="bg-up-linear-left">
                <content>
-                  <VBox fx:id="currentLocationForecastVBox" alignment="CENTER" spacing="10.0">
+                  <VBox fx:id="currentLocationForecastVBox" alignment="CENTER" spacing="10.0" styleClass="bg-up-linear-left">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                      <children>
-                        <Label fx:id="currentLocationDayLabel" styleClass="text-16" text="Label" />
+                        <Label fx:id="currentLocationDayLabel" styleClass="text-26" text="Label" />
                         <Label fx:id="currentLocationCityName" text="Label">
                            <padding>
                               <Insets top="40.0" />
                            </padding>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
                         </Label>
                         <HBox alignment="CENTER" spacing="30.0">
                            <padding>
@@ -91,7 +99,10 @@
                         <Label fx:id="currentLocationWeatherDescription" styleClass="temperature-description" />
                         <HBox alignment="CENTER" spacing="10">
                            <WeatherIconView fx:id="currentLocationWeatherIcon" size="45px" styleClass="icon-white" />
-                           <Label fx:id="currentLocationMainTemperature" styleClass="temperature-number" />
+                           <Label fx:id="currentLocationMainTemperature" styleClass="temperature-number">
+                              <font>
+                                 <Font size="24.0" />
+                              </font></Label>
                         </HBox>
                         <HBox alignment="CENTER" spacing="50">
                            <padding><Insets bottom="30" top="35" /></padding>
@@ -99,7 +110,7 @@
                               <HBox spacing="10">
                                  <WeatherIconView glyphName="WINDY" size="20px" styleClass="icon-white" />
                                  <VBox spacing="5">
-                                    <Label text="Wiatr" />
+                                    <Label text="Wind" />
                                     <Label fx:id="currentLocationWindSpeed" styleClass="text-bold">
                                     </Label>
                                  </VBox>
@@ -108,14 +119,14 @@
                               <HBox spacing="10">
                                  <WeatherIconView glyphName="HUMIDITY" size="20px" styleClass="icon-white" />
                                  <VBox spacing="5">
-                                    <Label text="Wilgotność" />
+                                    <Label text="Humidity" />
                                     <Label fx:id="currentLocationHumidity" styleClass="text-bold" />
                                  </VBox>
                               </HBox>
                               <HBox spacing="10">
                                  <WeatherIconView glyphName="BAROMETER" size="20px" styleClass="icon-white" />
                                  <VBox spacing="5">
-                                    <Label text="Ciśnienie" />
+                                    <Label text="Air Pressure" />
                                     <Label fx:id="currentLocationPressure" styleClass="text-bold" />
                                  </VBox>
                               </HBox>
@@ -131,12 +142,16 @@
 
       <VBox fx:id="travelLocationVBox" alignment="CENTER" styleClass="text-white" GridPane.columnIndex="1" GridPane.rowIndex="0">
          <children>
-            <GridPane alignment="CENTER" hgap="10" styleClass="bg-white" vgap="10">
+            <GridPane alignment="CENTER" hgap="10" vgap="10">
                <padding>
                   <Insets topRightBottomLeft="15" />
                </padding>
                <children>
-                  <Label styleClass="text-black, text-16" text="Destination" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+                  <Label text="Destination" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+                     <styleClass>
+                        <String fx:value="text-18" />
+                        <String fx:value="text-loc-bold" />
+                     </styleClass></Label>
                   <TextField fx:id="travelLocationTextFieldSearch" alignment="CENTER" focusTraversable="false" promptText="Enter City" styleClass="field-search" GridPane.columnIndex="0" GridPane.rowIndex="1">
                      <font>
                         <Font size="15.0" />
@@ -146,8 +161,7 @@
                      </padding>
                   </TextField>
                   <Label fx:id="travelLocationWarningLabel" styleClass="text-red, text-16" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                  <Button focusTraversable="false" onAction="#setTravelLocation" GridPane.columnIndex="1"
-                          GridPane.rowIndex="1">
+                  <Button focusTraversable="false" onAction="#setTravelLocation" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <padding><Insets bottom="8.0" left="8.0" right="8.0" top="8.0" /></padding>
                      <graphic>
                         <FontAwesomeIconView glyphName="LOCATION_ARROW" size="18px" />
@@ -163,19 +177,26 @@
                   <RowConstraints />
                   <RowConstraints />
                </rowConstraints>
+               <styleClass>
+                  <String fx:value="bg-white" />
+                  <String fx:value="bg-up-linear-right" />
+               </styleClass>
             </GridPane>
             <ScrollPane fx:id="travelLocationScrollPane" fitToHeight="true" fitToWidth="true">
                <content>
-                  <VBox fx:id="travelLocationForecastVBox" alignment="CENTER" spacing="10.0">
+                  <VBox fx:id="travelLocationForecastVBox" alignment="CENTER" spacing="10.0" styleClass="bg-up-linear-right">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                      <children>
-                        <Label fx:id="travelLocationDayLabel" styleClass="text-16" text="Label" />
+                        <Label fx:id="travelLocationDayLabel" styleClass="text-26" text="Label" />
                         <Label fx:id="travelLocationCityName" text="Label">
                            <padding>
                               <Insets top="40.0" />
                            </padding>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
                         </Label>
                         <HBox alignment="CENTER" spacing="30.0">
                            <padding>
@@ -195,7 +216,10 @@
                         <Label fx:id="travelLocationWeatherDescription" styleClass="temperature-description" />
                         <HBox alignment="CENTER" spacing="10">
                            <WeatherIconView fx:id="travelLocationWeatherIcon" size="45px" styleClass="icon-white" />
-                           <Label fx:id="travelLocationMainTemperature" styleClass="temperature-number" />
+                           <Label fx:id="travelLocationMainTemperature" styleClass="temperature-number">
+                              <font>
+                                 <Font size="24.0" />
+                              </font></Label>
                         </HBox>
                         <HBox alignment="CENTER" spacing="50">
                            <padding><Insets bottom="30" top="35" /></padding>
@@ -203,7 +227,7 @@
                               <HBox spacing="10">
                                  <WeatherIconView glyphName="WINDY" size="20px" styleClass="icon-white" />
                                  <VBox spacing="5">
-                                    <Label text="Wiatr" />
+                                    <Label text="Wind" />
                                     <Label fx:id="travelLocationWindSpeed" styleClass="text-bold">
                                     </Label>
                                  </VBox>
@@ -212,14 +236,14 @@
                               <HBox spacing="10">
                                  <WeatherIconView glyphName="HUMIDITY" size="20px" styleClass="icon-white" />
                                  <VBox spacing="5">
-                                    <Label text="Wilgotność" />
+                                    <Label text="Humidity" />
                                     <Label fx:id="travelLocationHumidity" styleClass="text-bold" />
                                  </VBox>
                               </HBox>
                               <HBox spacing="10">
                                  <WeatherIconView glyphName="BAROMETER" size="20px" styleClass="icon-white" />
                                  <VBox spacing="5">
-                                    <Label text="Ciśnienie" />
+                                    <Label text="Air Pressure" />
                                     <Label fx:id="travelLocationPressure" styleClass="text-bold" />
                                  </VBox>
                               </HBox>
@@ -234,6 +258,9 @@
       </VBox>
    </children>
    <stylesheets>
-      <URL value="@css/style.css"></URL>
+      <URL value="@css/style.css" />
    </stylesheets>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>

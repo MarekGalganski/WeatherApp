@@ -135,7 +135,10 @@ public class Controller implements Initializable {
         try {
             JSONConverter jsonConverter = new JSONConverter();
             citiesMap = jsonConverter.getCitiesFromJson(Config.FILE_WITH_CITIES);
+
             setAutoCompleteTextField();
+            setReadyCurrentLocation();
+            setReadyTravelLocation();
             
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -211,6 +214,20 @@ public class Controller implements Initializable {
                 travelLocationWarningLabel, travelLocationScrollPane);
 
         travelLocationFiveDaysWeatherControl.setControlsOfFiveDaysWeather(openWeatherMap, cityId);
+    }
+
+    private void setReadyCurrentLocation() throws APIException {
+            OpenWeatherMap openWeatherMap = new OpenWeatherMap(Config.API_KEY);
+
+            setCurrentWeatherCurrentLocation(openWeatherMap, citiesMap.get(Config.CURRENT_LOCATION));
+            setFiveDaysForecastWeatherCurrentLocation(openWeatherMap, citiesMap.get(Config.CURRENT_LOCATION));
+    }
+
+    private void setReadyTravelLocation() throws APIException {
+        OpenWeatherMap openWeatherMap = new OpenWeatherMap(Config.API_KEY);
+
+        setCurrentWeatherTravelLocation(openWeatherMap, citiesMap.get(Config.TRAVEL_LOCATION));
+        setFiveDaysForecastWeatherTravelLocation(openWeatherMap, citiesMap.get(Config.TRAVEL_LOCATION));
     }
 
 
