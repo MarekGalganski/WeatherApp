@@ -1,0 +1,111 @@
+.grid{
+    -icons-color: black;
+    -fx-background: rgb(225, 228, 203);
+}
+
+.bg-up-linear-left {
+    -fx-background-color: linear-gradient(to top right, #0D324D, #7F5A83);
+}
+.bg-up-linear-right {
+    -fx-background-color: linear-gradient(to top right, #380036, #0CBABA);
+}
+.bg-chart {
+    -fx-border-color: black;
+    -fx-border-radius: 10;
+
+}
+
+.label,
+.text-white {
+	-fx-text-fill: rgb(225, 228, 203);
+}
+
+.icon-white {
+	-fx-fill: rgb(225, 228, 203);
+}
+
+.text-black {
+	-fx-text-fill: #0B032D;
+}
+
+.text-red {
+	-fx-text-fill: #922B21;
+}
+
+.text-loc-bold {
+    -fx-font-weight: bold;
+}
+
+.text-bold {
+	-fx-font-weight: bold;
+	-fx-font-size: 14;
+}
+
+.text-16 {
+	-fx-font-size: 16;
+}
+
+.text-18 {
+	-fx-font-size: 18;
+}
+
+.text-22 {
+	-fx-font-size: 22;
+}
+.text-26 {
+	-fx-font-size: 26;
+	-fx-underline: true;
+}
+
+.localization-font {
+	-fx-font-size: 28;
+	-fx-fill: rgb(225, 228, 203);
+}
+
+.axis-tick-mark,
+.axis-minor-tick-mark,
+.chart-vertical-grid-lines,
+.chart-horizontal-grid-lines,
+.chart-vertical-zero-line,
+.chart-horizontal-zero-line  {
+    -fx-stroke: transparent;
+}
+
+.chart-plot-background {
+	-fx-padding: 10;
+    -fx-background-color: transparent;
+}
+
+.axis {
+	-fx-border-color: transparent;
+    -fx-tick-label-fill: black;
+}
+
+.default-color1.chart-series-line {
+	-fx-stroke: transparent;
+}
+
+.default-color0.chart-series-line {
+ -fx-stroke: black;
+ }
+
+.scroll-pane > .viewport,
+.scroll-pane,
+.default-color0.chart-line-symbol,
+.default-color1.chart-line-symbol {
+  	-fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color: #c7ced2;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #a1a4a7;
+    -fx-background-radius: 5em;
+}
+
+.scroll-pane > .corner {
+      -fx-background-color: #c7ced2;
+}
